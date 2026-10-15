@@ -150,3 +150,17 @@ python -m unittest discover -s tests -v
 - Los minutos deben ser un entero entre 1 y 120.
 - No se puede mover el bus, buscar ni eliminar en una ruta vacía.
 - Insertar "después de" exige que la parada de referencia exista.
+
+## 11. Ejemplo de uso por consola
+
+```
+Elige una opción: 4
+¿Después de qué parada?: Hospital
+Nombre de la nueva parada: Farmacia
+Minutos hasta la parada que sigue: 2
+
+Parada 'Farmacia' agregada.
+```
+
+Al recorrer hacia adelante desde la terminal, la ruta queda:
+`Terminal → Universidad → Hospital → Farmacia → Parque Central → Centro Comercial → Estadio → Terminal`

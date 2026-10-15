@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruta Circular de Bus</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>🚌 Ruta Circular de Bus</h1>
+        <p>Listas circulares dobles aplicadas a una ruta de transporte: el bus avanza o retrocede entre paradas sin llegar nunca a un final.</p>
+    </header>
+
+    <main>
+        <section class="stats">
+            <div class="card"><span>Paradas</span><strong id="stat-size">0</strong></div>
+            <div class="card"><span>Tiempo de una vuelta</span><strong id="stat-total">0 min</strong></div>
+            <div class="card"><span>Vueltas completas</span><strong id="stat-laps">0</strong></div>
+            <div class="card"><span>Tiempo recorrido</span><strong id="stat-elapsed">0 min</strong></div>
+        </section>
+
+        <section class="layout">
+            <div class="panel">
+                <h2 id="route-name">Ruta</h2>
+                <div class="ring-wrapper">
+                    <div class="ring" id="ring"></div>
+                </div>
+                <div class="controls">
+                    <button id="btn-behind">◀ Retroceder</button>
+                    <button id="btn-auto" class="secondary">▶ Recorrido automático</button>
+                    <button id="btn-ahead">Avanzar ▶</button>
+                </div>
+                <div class="position">
+                    <div><span>Parada de atrás</span><strong id="behind-stop">-</strong></div>
+                    <div class="current"><span>Bus en</span><strong id="current-stop">-</strong></div>
+                    <div><span>Parada de adelante</span><strong id="ahead-stop">-</strong></div>
+                </div>
+            </div>
+
+            <div class="side">
+                <div class="panel">
+                    <h2>Agregar parada</h2>
+                    <form id="stop-form">
+                        <label>Nombre de la parada
+                            <input type="text" id="stop-name" maxlength="30" placeholder="Ej: Biblioteca" required>
+                        </label>
+                        <label>Minutos hasta la parada que sigue
+                            <input type="number" id="stop-minutes" min="1" max="120" value="5" required>
+                        </label>
+                        <label>¿Dónde la ubicamos?
+                            <select id="stop-position">
+                                <option value="end">Al final de la ruta</option>
+                                <option value="start">Al inicio (nueva terminal)</option>
+                                <option value="after">Después de otra parada</option>
+                            </select>
+                        </label>
+                        <label id="reference-label" class="hidden">Después de
+                            <select id="stop-reference"></select>
+                        </label>
+                        <button type="submit">Agregar</button>
+                    </form>
+                    <p id="message" class="message"></p>
+                </div>
+
+                <div class="panel">
+                    <h2>Buscar parada</h2>
+                    <form id="search-form" class="inline">
+                        <input type="text" id="search-name" placeholder="Nombre de la parada" required>
+                        <button type="submit">Buscar</button>
+                    </form>
+                    <p id="search-result" class="message"></p>
+                </div>
+
+                <div class="panel">
+                    <h2>Paradas registradas</h2>
+                    <ul id="stop-list" class="stop-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Recorridos desde la posición del bus</h2>
+            <h3>Hacia adelante</h3>
+            <div class="traverse" id="ahead-route"></div>
+            <h3>Hacia atrás</h3>
+            <div class="traverse" id="behind-route"></div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
